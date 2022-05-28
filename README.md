@@ -1,5 +1,8 @@
-# Navigation Example
-fds
+# myMovies
+
+  app criado para ser seu portifolio de filmes que deseja assistir e saber quais já assistiu e obter recomendações
+### Navigation Example
+
 <p>
   <!-- iOS -->
   <a href="https://itunes.apple.com/app/apple-store/id982107779">
