@@ -7,6 +7,7 @@ import {
 } from "react-native";
 
 import Colors from "../constants/Colors";
+import Fonts from "../constants/Fonts";
 
 export function useThemeColor(props, colorName) {
   const theme = useColorScheme();
@@ -21,9 +22,9 @@ export function useThemeColor(props, colorName) {
 
 export function Text(props) {
   const { style, lightColor, darkColor, ...otherProps } = props;
-  const color = useThemeColor({ light: lightColor, dark: darkColor }, "text");
+  const color = useThemeColor({ light: lightColor, dark: darkColor}, "text");
 
-  return <DefaultText style={[{ color }, style]} {...otherProps} />;
+  return <DefaultText style={[{ color },Fonts.text, style]} {...otherProps} />;
 }
 
 export function View(props) {

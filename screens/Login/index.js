@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { SafeAreaView, StatusBar, StyleSheet, TouchableOpacity } from "react-native";
+import { SafeAreaView, StatusBar, StyleSheet, TouchableOpacity, TextInput } from "react-native";
+import { Ionicons } from '@expo/vector-icons';
 
 import { Text, View } from "../../components/Themed";
 import Colors from "../../constants/Colors";
@@ -9,14 +10,32 @@ export default function LoginScreen() {
 
   const [login, setLogin]=useState(true)
 
+  const [secure, setSecure]=useState(true)
+
   function SingIn(params) {
     return(
       <View style={styles.infosLogin}>
-        <Text>logar</Text>
+        <TextInput
+        style={styles.input}
+        placeholder="Email"
+        textContentType="emailAddress"
+        />
+        <View style={[styles.input,{backgroundColor:'transparent',flexDirection:'row'}]}>
+        <TextInput
+        placeholder="Senha"
+        secureTextEntry={secure}
+        style={{fontSize:18,color:'#fff'}}
+        />
         <TouchableOpacity>
-          <Text style={[Fonts.h3,styles.btLogin]}>
-            Entrar
-          </Text>
+          <Ionicons name="ios-eye-outline" size={20} color="#fff" />
+        </TouchableOpacity>
+        </View>
+        <TouchableOpacity>
+          <View style={styles.btLogin}>
+            <Text style={Fonts.h3}>
+              Entrar
+            </Text>
+          </View>
         </TouchableOpacity>
       </View>
     )
@@ -24,11 +43,25 @@ export default function LoginScreen() {
   function Create(params) {
     return(
       <View style={styles.infosLogin}>
-        <Text>criar</Text>
+        <TextInput
+        style={styles.input}
+        placeholder="Nome"
+        />
+        <TextInput
+        style={styles.input}
+        placeholder="Email"
+        textContentType="emailAddress"
+        />
+        <TextInput
+        style={styles.input}
+        placeholder="Senha"
+        />
         <TouchableOpacity>
-          <Text style={[Fonts.h3,styles.btLogin]}>
+          <View style={styles.btLogin}>
+          <Text style={Fonts.h3}>
             Cadastrar-se
           </Text>
+          </View>
         </TouchableOpacity>
       </View>
     )
@@ -45,7 +78,7 @@ export default function LoginScreen() {
         <Text style={Fonts.h2}>{login? "Login" : "Cadastro" }</Text>
         {login? SingIn() : Create()}
         <TouchableOpacity onPress={()=>setLogin(!login)}>
-          <Text>
+          <Text style={{textDecorationLine: 'underline'}}>
             {login?
               "Não tenho uma conta" :
               "Já tenho uma conta"
@@ -77,10 +110,20 @@ const styles = StyleSheet.create({
     paddingVertical:10
   },
   btLogin:{
-    textAlign:'center',
-    backgroundColor:'#f00',
+    alignItems:'center',
     paddingVertical:10,
     borderRadius:10,
     marginTop:10
+  },
+  input:{
+    fontSize:18,
+    marginVertical:5,
+    paddingVertical: 5,
+    paddingHorizontal:10,
+    borderColor:'#fff',
+    borderWidth:2,
+    borderRadius:10,
+    color:'#fff'
   }
+
 });

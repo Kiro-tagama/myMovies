@@ -10,5 +10,9 @@ export default{
   h3:{
     fontSize: 20,
     fontWeight: "bold",
+  },
+  text:{
+    fontSize: 18,
+    fontWeight: "bold",
   }
 }
