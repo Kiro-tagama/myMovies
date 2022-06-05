@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { SafeAreaView, StatusBar, StyleSheet, TouchableOpacity, TextInput } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 import { Text, View } from "../../components/Themed";
 import Colors from "../../constants/Colors";
@@ -20,14 +21,17 @@ export default function LoginScreen() {
         placeholder="Email"
         textContentType="emailAddress"
         />
-        <View style={[styles.input,{backgroundColor:'transparent',flexDirection:'row'}]}>
+        <View style={[styles.input,{backgroundColor:'transparent',flexDirection:'row',alignItems:'center'}]}>
         <TextInput
         placeholder="Senha"
         secureTextEntry={secure}
-        style={{fontSize:18,color:'#fff'}}
+        style={{fontSize:18,color:'#fff',width:'93%'}}
         />
-        <TouchableOpacity>
-          <Ionicons name="ios-eye-outline" size={20} color="#fff" />
+        <TouchableOpacity onPress={()=>setSecure(!secure)}>
+          {secure?
+            <Ionicons name="ios-eye-outline" size={20} color="#fff" />:
+            <Ionicons name="ios-eye-off-outline" size={20} color="#fff" />
+          }
         </TouchableOpacity>
         </View>
         <TouchableOpacity>
@@ -52,10 +56,19 @@ export default function LoginScreen() {
         placeholder="Email"
         textContentType="emailAddress"
         />
+        <View style={[styles.input,{backgroundColor:'transparent',flexDirection:'row',alignItems:'center'}]}>
         <TextInput
-        style={styles.input}
         placeholder="Senha"
+        secureTextEntry={secure}
+        style={{fontSize:18,color:'#fff',width:'93%'}}
         />
+        <TouchableOpacity onPress={()=>setSecure(!secure)}>
+          {secure?
+            <Ionicons name="ios-eye-outline" size={20} color="#fff" />:
+            <Ionicons name="ios-eye-off-outline" size={20} color="#fff" />
+          }
+        </TouchableOpacity>
+        </View>
         <TouchableOpacity>
           <View style={styles.btLogin}>
           <Text style={Fonts.h3}>
@@ -68,11 +81,11 @@ export default function LoginScreen() {
   }
 
   return (
-    <SafeAreaView style={[styles.container,{paddingTop:30}]}>
-      {/* icon */}
+    <View style={[styles.container,{paddingTop:30}]}>
       <View style={styles.containerIntro}>
         <Text style={[Fonts.h1,{color:Colors.azulAtivo}]}>myMovies</Text>
         <Text>Intro</Text>
+        <MaterialCommunityIcons name="movie-open-outline" size={250} color={Colors.azulAtivo} style={{textAlign:'center',marginTop:100,opacity:.3}}/>
       </View>
       <View style={styles.containerLogin}>
         <Text style={Fonts.h2}>{login? "Login" : "Cadastro" }</Text>
@@ -87,7 +100,7 @@ export default function LoginScreen() {
         </TouchableOpacity>
       </View>
 
-    </SafeAreaView>
+    </View>
   );
 }
 

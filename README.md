@@ -1,6 +1,8 @@
 # myMovies
 
   app criado para ser seu portifolio de filmes que deseja assistir e saber quais já assistiu e obter recomendações
+
+  - expo icons
 ### Navigation Example
 
 <p>
