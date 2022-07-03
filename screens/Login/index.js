@@ -7,7 +7,7 @@ import { Text, View } from "../../components/Themed";
 import Colors from "../../constants/Colors";
 import Fonts from "../../constants/Fonts";
 
-import { AuthContext } from "../../firebaseConfig/authFirebase";
+import {user,signIn,signUp} from "../../firebaseConfig/authFirebase.js";
 
 export default function LoginScreen() {
 
@@ -21,13 +21,11 @@ export default function LoginScreen() {
 
     const [secure, setSecure]=useState(true)
 
-    const {signIn,signUp}= useContext(AuthContext)
-
     function handleLogin(params) {
-      if (type == true) {
-        console.log(signIn, email);
-      } else {
-        return console.log('signUp');
+      if (type === true) {
+        signIn(email,password)
+      }else{
+        signUp(nome,email,password)
       }
     }
 
@@ -64,7 +62,7 @@ export default function LoginScreen() {
           }
         </TouchableOpacity>
         </View>
-        <TouchableOpacity onPress={handleLogin}>
+        <TouchableOpacity onPress={handleLogin} >
           <View style={styles.btLogin}>
             <Text style={Fonts.h3}>
               {type?
