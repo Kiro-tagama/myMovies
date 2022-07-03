@@ -7,12 +7,13 @@ import {
 } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import NotFoundScreen from "../screens/NotFoundScreen";
-import HomeScreen from "../screens/Home";
-import LoginScreen from "../screens/Login";
+import NotFoundScreen from "../src/screens/NotFoundScreen";
+import HomeScreen from "../src/screens/Home";
+import LoginScreen from "../src/screens/Login";
 
 import LinkingConfiguration from "./LinkingConfiguration";
 import { useState } from "react";
+import AuthProvider from "../src/firebase/authFirebase.js";
 
 export default function Navigation({ colorScheme }) {
   return (
@@ -20,7 +21,9 @@ export default function Navigation({ colorScheme }) {
       linking={LinkingConfiguration}
       theme={colorScheme === "dark" ? DarkTheme : DefaultTheme}
     >
-      <RootNavigator />
+      <AuthProvider>
+        <RootNavigator />
+      </AuthProvider>
     </NavigationContainer>
   );
 }

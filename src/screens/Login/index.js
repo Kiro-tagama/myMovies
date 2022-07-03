@@ -3,15 +3,17 @@ import { SafeAreaView, StatusBar, StyleSheet, TouchableOpacity, TextInput } from
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
-import { Text, View } from "../../components/Themed";
-import Colors from "../../constants/Colors";
-import Fonts from "../../constants/Fonts";
+import { Text, View } from "../../../components/Themed";
+import Colors from "../../../constants/Colors";
+import Fonts from "../../../constants/Fonts";
 
-import {user,signIn,signUp} from "../../firebaseConfig/authFirebase.js";
+import {AuthContext} from "../../firebase/authFirebase.js";
 
 export default function LoginScreen() {
 
   const [type ,setType]= useState(true)
+
+  const {signIn,signUp} = useContext(AuthContext)
   
   function login(params) {
     
@@ -22,10 +24,10 @@ export default function LoginScreen() {
     const [secure, setSecure]=useState(true)
 
     function handleLogin(params) {
-      if (type === true) {
-        signIn(email,password)
+      if (type == true) {
+        return signIn(email,password)
       }else{
-        signUp(nome,email,password)
+        return signUp(nome,email,password)
       }
     }
 

@@ -4,9 +4,9 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 
 import { FontAwesome5 } from '@expo/vector-icons';
 
-import { Text, View } from "../../components/Themed";
-import Colors from "../../constants/Colors";
-import Fonts from "../../constants/Fonts";
+import { Text, View } from "../../../components/Themed";
+import Colors from "../../../constants/Colors";
+import Fonts from "../../../constants/Fonts";
 import Axios from "axios";
 
 
