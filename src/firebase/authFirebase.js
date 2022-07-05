@@ -7,7 +7,9 @@ import {
   createUserWithEmailAndPassword
 } from 'firebase/auth';
 import {
-  getDatabase
+  getDatabase,
+  ref,
+  onValue
 } from 'firebase/database'
 
 export const AuthContext=createContext({})
@@ -16,6 +18,8 @@ export default function AuthProvider({children}){
 
 const auth = getAuth(app)
 const db = getDatabase(app)
+
+const refDb = ref(db, user+'/fav')
 
 const [user, setUser]= useState(null)
 
@@ -121,15 +125,19 @@ async function removeForDb(data){
   */
 }
 
-async function getFavDb(){
+async function getFavDb(data){
   // return movies to database
-
+  onValue(refDb,(snap)=>{
+    const resultDb = snap.val()
+    console.log('dados: ',resultDb);
+    return resultDb
+  }) 
   // return [?] or {?}
 }
 
 // data to child -> login and home (pages)
 return (
-  <AuthContext.Provider value={{signed:!!user ,user,signUp,signIn,signOut}} >
+  <AuthContext.Provider value={{signed:!!user ,user,signUp,signIn,signOut,includeInDb,removeForDb,getFavDb}} >
     {children}
   </AuthContext.Provider>
 )
