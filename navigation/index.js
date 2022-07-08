@@ -7,7 +7,6 @@ import {
 } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
-import NotFoundScreen from "../src/screens/NotFoundScreen";
 import LoginScreen from "../src/screens/Login";
 import HomeScreen from "../src/screens/Home";
 import ProfileScreen from "../src/screens/Profile";
@@ -36,18 +35,23 @@ const Stack = createStackNavigator();
 function RootNavigator() {
   const { user } = useContext(FirebaseContext)
 
+  function PagesApp(){
+    return(
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="Home" component={HomeScreen} /> 
+        <Stack.Screen name="Profile" component={ProfileScreen} />
+      </Stack.Navigator>
+    )
+  }
+
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false }}>
+    <>
       { user != null ?
-          <Stack.Screen name="Home" component={HomeScreen} /> :
-          <Stack.Screen name="Login" component={LoginScreen} />
+          <PagesApp/> :
+          <Stack.Navigator screenOptions={{ headerShown: false }}>
+            <Stack.Screen name="Login" component={LoginScreen} />
+          </Stack.Navigator>
       }
-      <Stack.Screen name="Profile" component={ProfileScreen} />
-      <Stack.Screen
-        name="NotFound"
-        component={NotFoundScreen}
-        options={{ title: "Oops!" }}
-      />
-    </Stack.Navigator>
+    </>
   );
 }

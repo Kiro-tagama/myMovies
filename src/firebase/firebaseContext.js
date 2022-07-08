@@ -4,7 +4,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { 
   getAuth, 
   signInWithEmailAndPassword, 
-  createUserWithEmailAndPassword
+  createUserWithEmailAndPassword,
+  signOut
 } from 'firebase/auth';
 import {
   getDatabase,
@@ -16,14 +17,11 @@ import {
 export const FirebaseContext=createContext({})
 
 export default function AuthProvider({children}){
-
   
   const auth = getAuth(app)
   const db = getDatabase(app)
   
   const [user, setUser]= useState(null)
-  
-  
 
 useEffect(()=>{
   async function loadStorage() {
@@ -31,9 +29,7 @@ useEffect(()=>{
 
     if(storageUser){
       setUser(JSON.parse(storageUser))
-      setLoading(false)
     }
-    setLoading(false)
 
   }
   loadStorage()
@@ -92,6 +88,7 @@ async function signUp(email,password,nome) {
     })
 
     // end save db user
+    
   })
   .catch((error) => {
     const errorCode = error.code;
@@ -101,17 +98,21 @@ async function signUp(email,password,nome) {
   });
 }
 
-async function signOut(params) {
-  //deslog
-
-  setUser(null)
-  console.log('signOut');
-}
-
 async function storageUser(data){
   // save user
   await AsyncStorage.setItem('Auth_user',JSON.stringify(data))
-  Asyn
+}
+
+async function signOut() {
+  //deslog
+  await signOut(auth)
+  await AsyncStorage.clear()
+    .then((data)=>{
+      console.log(data);
+      setUser(null)
+    })
+    .catch(err=>console.log(err))
+  console.log('saiu');
 }
 
 async function includeInDb(data){
@@ -145,7 +146,7 @@ async function getFavDb(data){
   // return [?] or {?}
 }
 
-getFavDb()
+// getFavDb()
 
 // data to child -> login and home (pages)
 return (

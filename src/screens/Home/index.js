@@ -8,8 +8,12 @@ import { Text, View } from "../../../styleSettings/Themed";
 import Colors from "../../../constants/Colors";
 import Fonts from "../../../constants/Fonts";
 
+import { useNavigation } from "@react-navigation/native";
+
 
 export default function HomeScreen() {
+  const navigation = useNavigation()
+
   const [tipo,setTipo]=useState() // filmes,todos,series
   const [genero,setGenero]=useState() // arrey de opçoes
   const [assistido,setAssistido]=useState(false) //true or false
@@ -19,9 +23,11 @@ export default function HomeScreen() {
       <View style={styles.header}>
         <View style={styles.headerAling}>
           <Text style={Fonts.h2}>myMovies</Text>
-          <Text>
-          <FontAwesome5 name="user-circle" size={35} />
-          </Text>
+          <TouchableOpacity onPress={()=>navigation.navigate("Profile")}>
+            <Text>
+              <FontAwesome5 name="user-circle" size={35} />
+            </Text>
+          </TouchableOpacity>
         </View>
         <View style={[styles.headerAling,{marginTop:20,justifyContent:'space-evenly'}]}>
           <Text>Filmes</Text>

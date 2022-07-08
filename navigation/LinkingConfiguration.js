@@ -11,8 +11,7 @@ export default {
     screens: {
       Login: "login",
       Home: "home",
-      Profile: "profile",
-      NotFound: "*",
+      Profile: "home/profile",
     },
   },
 };
