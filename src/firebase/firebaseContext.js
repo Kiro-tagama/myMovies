@@ -9,19 +9,21 @@ import {
 import {
   getDatabase,
   ref,
-  onValue
+  onValue,
+  set
 } from 'firebase/database'
 
-export const AuthContext=createContext({})
+export const FirebaseContext=createContext({})
 
 export default function AuthProvider({children}){
 
-const auth = getAuth(app)
-const db = getDatabase(app)
-
-const refDb = ref(db, user+'/fav')
-
-const [user, setUser]= useState(null)
+  
+  const auth = getAuth(app)
+  const db = getDatabase(app)
+  
+  const [user, setUser]= useState(null)
+  
+  
 
 useEffect(()=>{
   async function loadStorage() {
@@ -39,8 +41,15 @@ useEffect(()=>{
 
 async function signIn(email,password) {
   await signInWithEmailAndPassword(auth, email, password)
-    .then(async(value)=>{
-      let uid=value.user.uid
+    .then((cred)=>{
+      let user=cred.user
+
+      let data={
+        uid:user.uid,
+        email:user.email
+      }
+      setUser(data)
+      storageUser(data)
 
       // ??????
       
@@ -57,47 +66,45 @@ async function signIn(email,password) {
       //
 
     })
-    .catch((error)=>{
-      alert(error.code)
-      setLoadingAuth(false)
+    .catch((err)=>{
+      console.log(err);
     })
   console.log('signIn');
 }
 
 async function signUp(email,password,nome) {
-  await createUserWithEmailAndPassword(auth, email, password)
-  .then(async(value)=>{
-    let uid=value.user.uid
-
+  await createUserWithEmailAndPassword(auth, email, password, nome)
+  .then((cred)=>{
+    let user=cred.user
     // star save db user
-
-    // await firebase.database().ref('users').child(uid).set({
-    //   fav:[],
-    //   nome: nome
-    // })
-    // .then(()=>{
-    //   let data={
-    //     uid:uid,
-    //     nome:nome, 
-    //     email: value.user.email
-    //   }
-    //   setUser(data)
-    //   storageUser(data)
-    // })
+    console.log('user:'+ user);
+    set(ref(db,user.uid),{
+      fav:{},
+      nome:nome,
+    }).then(()=>{
+      let data={
+        uid:uid,
+        nome:nome, 
+        email:email
+      }
+      setUser(data)
+      storageUser(data)
+    })
 
     // end save db user
   })
   .catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
+    console.log('err: '+errorCode+'\n'+errorMessage);
     //..
   });
-  console.log('signUp '+ nome);
 }
 
 async function signOut(params) {
   //deslog
 
+  setUser(null)
   console.log('signOut');
 }
 
@@ -114,6 +121,9 @@ async function includeInDb(data){
   /*
     id - user - favs
   */
+    set(ref(db,user.uid+'fav/'),{
+      
+    })
 }
 
 async function removeForDb(data){
@@ -127,7 +137,7 @@ async function removeForDb(data){
 
 async function getFavDb(data){
   // return movies to database
-  onValue(refDb,(snap)=>{
+  onValue(ref(db,user.uid+'/fav/'),(snap)=>{
     const resultDb = snap.val()
     console.log('dados: ',resultDb);
     return resultDb
@@ -135,10 +145,12 @@ async function getFavDb(data){
   // return [?] or {?}
 }
 
+getFavDb()
+
 // data to child -> login and home (pages)
 return (
-  <AuthContext.Provider value={{signed:!!user ,user,signUp,signIn,signOut,includeInDb,removeForDb,getFavDb}} >
+  <FirebaseContext.Provider value={{signed:!!user ,user,signUp,signIn,signOut,includeInDb,removeForDb,getFavDb}} >
     {children}
-  </AuthContext.Provider>
+  </FirebaseContext.Provider>
 )
 }

@@ -9,8 +9,9 @@ export default {
   prefixes: [Linking.createURL("/")],
   config: {
     screens: {
-      Home: "one",
-      Login: "two",
+      Login: "login",
+      Home: "home",
+      Profile: "profile",
       NotFound: "*",
     },
   },

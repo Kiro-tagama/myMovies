@@ -8,12 +8,13 @@ import {
 import { createStackNavigator } from "@react-navigation/stack";
 
 import NotFoundScreen from "../src/screens/NotFoundScreen";
-import HomeScreen from "../src/screens/Home";
 import LoginScreen from "../src/screens/Login";
+import HomeScreen from "../src/screens/Home";
+import ProfileScreen from "../src/screens/Profile";
 
 import LinkingConfiguration from "./LinkingConfiguration";
-import { useState } from "react";
-import AuthProvider from "../src/firebase/authFirebase.js";
+import { useContext, useState } from "react";
+import AuthProvider, { FirebaseContext } from "../src/firebase/firebaseContext";
 
 export default function Navigation({ colorScheme }) {
   return (
@@ -33,13 +34,15 @@ export default function Navigation({ colorScheme }) {
 const Stack = createStackNavigator();
 
 function RootNavigator() {
-  const [haveUser, setHaveUser]=useState(false)
+  const { user } = useContext(FirebaseContext)
+
   return (
     <Stack.Navigator screenOptions={{ headerShown: false }}>
-      { haveUser ?
+      { user != null ?
           <Stack.Screen name="Home" component={HomeScreen} /> :
           <Stack.Screen name="Login" component={LoginScreen} />
       }
+      <Stack.Screen name="Profile" component={ProfileScreen} />
       <Stack.Screen
         name="NotFound"
         component={NotFoundScreen}
