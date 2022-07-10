@@ -12,6 +12,5 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
-console.log('foi');
 
 module.exports = app

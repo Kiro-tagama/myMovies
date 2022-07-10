@@ -1,7 +1,8 @@
 import { useContext, useState } from "react";
-import { SafeAreaView, StatusBar, StyleSheet, TouchableOpacity, TextInput } from "react-native";
+import { SafeAreaView, StyleSheet, TouchableOpacity, TextInput } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { StatusBar } from 'expo-status-bar';
 
 import { Text, View } from "../../../styleSettings/Themed";
 import Colors from "../../../constants/Colors";
@@ -29,6 +30,7 @@ export default function LoginScreen() {
       }else{
         return signUp(email,password,nome)
       }
+
     }
 
     return(
@@ -74,6 +76,7 @@ export default function LoginScreen() {
             </Text>
           </View>
         </TouchableOpacity>
+        <StatusBar/>
       </View>
     )
   }

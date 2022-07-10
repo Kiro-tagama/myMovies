@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { StyleSheet, FlatList } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { StatusBar } from 'expo-status-bar';
 
 import { FontAwesome5 } from '@expo/vector-icons';
 
@@ -61,6 +62,7 @@ export default function HomeScreen() {
           </View>
         </TouchableOpacity>
       </View>
+      <StatusBar style="light"/>
     </View>
   );
 }

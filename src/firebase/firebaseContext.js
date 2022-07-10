@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import app from './index' //firebase config
-import AsyncStorage from '@react-native-async-storage/async-storage'; 
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { 
   getAuth, 
   signInWithEmailAndPassword, 
@@ -79,9 +79,8 @@ async function signUp(email,password,nome) {
       nome:nome,
     }).then(()=>{
       let data={
-        uid:uid,
-        nome:nome, 
-        email:email
+        uid:user.uid,
+        email:user.email
       }
       setUser(data)
       storageUser(data)
@@ -103,16 +102,18 @@ async function storageUser(data){
   await AsyncStorage.setItem('Auth_user',JSON.stringify(data))
 }
 
-async function signOut() {
+async function deslog() {
   //deslog
   await signOut(auth)
+  
   await AsyncStorage.clear()
-    .then((data)=>{
-      console.log(data);
-      setUser(null)
-    })
-    .catch(err=>console.log(err))
+  .then(()=>{
+    setUser(null)
+  })
+  .catch(err=>console.log(err))
+  
   console.log('saiu');
+  return
 }
 
 async function includeInDb(data){
@@ -150,7 +151,7 @@ async function getFavDb(data){
 
 // data to child -> login and home (pages)
 return (
-  <FirebaseContext.Provider value={{signed:!!user ,user,signUp,signIn,signOut,includeInDb,removeForDb,getFavDb}} >
+  <FirebaseContext.Provider value={{signed:!!user ,user,signUp,signIn,deslog,includeInDb,removeForDb,getFavDb}} >
     {children}
   </FirebaseContext.Provider>
 )
