@@ -23,6 +23,7 @@ export default function AuthProvider({children}){
   
   const [user, setUser]= useState(null)
 
+
 useEffect(()=>{
   async function loadStorage() {
     const storageUser= await AsyncStorage.getItem('Auth_user')
@@ -40,12 +41,11 @@ async function signIn(email,password) {
     .then((cred)=>{
       let user=cred.user
 
-      let data={
-        uid:user.uid,
-        email:user.email
-      }
-      setUser(data)
-      storageUser(data)
+      onValue(ref(db,user.uid),(snap)=>{
+        const dataUser = snap.val()
+        setUser(dataUser)
+      }) 
+      storageUser(user)
 
       // ??????
       
@@ -78,12 +78,11 @@ async function signUp(email,password,nome) {
       fav:{},
       nome:nome,
     }).then(()=>{
-      let data={
-        uid:user.uid,
-        email:user.email
-      }
-      setUser(data)
-      storageUser(data)
+      onValue(ref(db,user.uid),(snap)=>{
+        const dataUser = snap.val()
+        setUser(dataUser)
+      }) 
+      storageUser(user)
     })
 
     // end save db user
@@ -116,42 +115,31 @@ async function deslog() {
   return
 }
 
-async function includeInDb(data){
+async function includeInDb(type,code){
   // include user's favorite movie/series
   // include favorite movie/series of user
 
   /*
-    id - user - favs
+    id - user - fav - type[code]
   */
-    set(ref(db,user.uid+'fav/'),{
-      
+    set(ref(db,user.uid+'fav/'+type),{
+      code
     })
 }
 
-async function removeForDb(data){
+async function removeForDb(type,code){
   // remove user's favorite movie/series
   // remove favorite movie/series of user
 
   /*
-    id - user - nameFav (del)
+    id - user - Fav - type[code] // del code
   */
 }
 
-async function getFavDb(data){
-  // return movies to database
-  onValue(ref(db,user.uid+'/fav/'),(snap)=>{
-    const resultDb = snap.val()
-    console.log('dados: ',resultDb);
-    return resultDb
-  }) 
-  // return [?] or {?}
-}
-
-// getFavDb()
 
 // data to child -> login and home (pages)
 return (
-  <FirebaseContext.Provider value={{signed:!!user ,user,signUp,signIn,deslog,includeInDb,removeForDb,getFavDb}} >
+  <FirebaseContext.Provider value={{signed:!!user ,user,signUp,signIn,deslog,includeInDb,removeForDb}} >
     {children}
   </FirebaseContext.Provider>
 )

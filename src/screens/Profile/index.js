@@ -11,9 +11,11 @@ import { useNavigation } from "@react-navigation/native";
 
 
 export default function ProfileScreen(){
-  const { deslog, get } = useContext(FirebaseContext)
+  const { deslog, user } = useContext(FirebaseContext)
 
   const navigation=useNavigation()
+
+  //console.log(user.fav.movies[0]);
 
   return (
     <View style={styles.container}>
@@ -26,7 +28,7 @@ export default function ProfileScreen(){
         </TouchableOpacity>
       </View>
       <View style={{padding:20,flex:1}}>
-
+        <Text>{user && user.nome}</Text>
       </View>
       <StatusBar/>
     </View>
@@ -41,8 +43,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingBottom: 20,
     paddingTop:45,
-    borderBottomStartRadius:15,
-    borderBottomEndRadius:15,
     flexDirection:"row",
     justifyContent:"space-between"
   },
