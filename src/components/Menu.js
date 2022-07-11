@@ -3,13 +3,11 @@ import { View, Text } from "../../styleSettings/Themed";
 import Colors from "../../constants/Colors";
 import Fonts from "../../constants/Fonts";
 import { FontAwesome5 } from '@expo/vector-icons';
-import Divider from "./divider";
 
 export default function Menu(){
 
   return(
     <View style={styles.menu}>
-      <Divider/>
       <TouchableOpacity>
         <View style={[styles.opcoes,{borderTopLeftRadius:10,borderBottomLeftRadius:10}]}>
           <Text></Text>
@@ -18,7 +16,9 @@ export default function Menu(){
       </TouchableOpacity>
       <TouchableOpacity >
         <View style={[styles.opcoes,{}]}>
-          <Text><FontAwesome5 name="random" size={30}/></Text>
+          <Text>
+            <FontAwesome5 name="random" size={30}/>
+          </Text>
           <Text>Aleatorio</Text>
         </View>
       </TouchableOpacity>
