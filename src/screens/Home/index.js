@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { StyleSheet, FlatList } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
+import { StyleSheet, TouchableOpacity } from "react-native";
 import { StatusBar } from 'expo-status-bar';
 
 import { FontAwesome5 } from '@expo/vector-icons';
@@ -10,6 +9,7 @@ import Colors from "../../../constants/Colors";
 import Fonts from "../../../constants/Fonts";
 
 import { useNavigation } from "@react-navigation/native";
+import Menu from "../../components/Menu";
 
 
 export default function HomeScreen() {
@@ -42,26 +42,7 @@ export default function HomeScreen() {
         {/* <FlatList data={}/> */}
       </View>
       {/* /// */}
-      <View style={styles.menu}>
-        <TouchableOpacity onPress={()=>setAssistido(false)}>
-          <View style={[styles.opcoes,{borderTopLeftRadius:10,borderBottomLeftRadius:10}]}>
-            <Text></Text>
-            <Text>Todos</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity >
-          <View style={[styles.opcoes,{}]}>
-            <Text><FontAwesome5 name="random" size={30}/></Text>
-            <Text>Aleatorio</Text>
-          </View>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={()=>setAssistido(true)}>
-          <View style={[styles.opcoes,{borderTopRightRadius:10,borderBottomRightRadius:10}]}>
-            <Text></Text>
-            <Text>Já assisti</Text>
-          </View>
-        </TouchableOpacity>
-      </View>
+      <Menu/>
       <StatusBar style="light"/>
     </View>
   );
