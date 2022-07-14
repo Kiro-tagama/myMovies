@@ -24,16 +24,28 @@ export default function GenreLists(){
         <View style={{flex:1,paddign:2}}>
             {/* se type for filmes */}
             <Text>Em cartaz</Text>
-            <FlatList/>
+            <FlatList
+                data={cartaz}
+                renderItem={<Card/>}
+                keyExtractor={item => item.id}
+            />
             {/* break line */}
             <Text>top alguma coisa...</Text>
-            <FlatList/>
+            <FlatList
+                data={topRated}
+                renderItem={<Card/>}
+                keyExtractor={item => item.id}
+            />
 
             {/* colocar um seletor de genero??? */}
             <Text>
                 Genero: 
             </Text>
-            <FlatList/>
+            <FlatList
+                data={genre}
+                renderItem={<Card/>}
+                keyExtractor={item => item.id}
+            />
 
         </View>
     )
