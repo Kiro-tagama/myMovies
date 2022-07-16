@@ -17,15 +17,18 @@ export default function HomeScreen() {
   const [genero,setGenero]=useState() // arrey de opçoes
   const [assistido,setAssistido]=useState(false) //true or false
   
+  const [search, setSearch] = useState('')
+
   return (
     <View style={styles.container}>
-      <Header/>
+      <Header search={search} setSearch={setSearch}/>
       {/* /// */}
       <View style={styles.container}>
 
-       {/*  <GenreLists/> */}
-       {/* ou */}
-       {/* <Search/> */}
+        {
+          search.length == 0 ?
+          <GenreLists/> : <Search search={search}/>
+        }
         
       </View>
       {/* /// */}

@@ -1,7 +1,10 @@
 import React, {useState,useEffect} from 'react';
 
-import { FlatList } from "react-native";
+import { StyleSheet,FlatList } from "react-native";
 import { Text, View } from "../../styleSettings/Themed";
+
+import { api } from '../api/api';
+import Card from './Card';
 
 export default function GenreLists(){
     const [cartaz, setCartaz]= useState([])
@@ -16,21 +19,19 @@ export default function GenreLists(){
         setGenre(api(`${typeGenre}/movie/list`))
     }, [])
 
-    console.log(cartaz);
-    console.log(topRated);
-    console.log(genre);
+    // console.log(api('genre/movie/list'));
 
     return(
-        <View style={{flex:1,paddign:2}}>
+        <View style={{flex:1,paddign:2,marginVertical:10}}>
             {/* se type for filmes */}
-            <Text>Em cartaz</Text>
+            <Text style={styles.text}>Em cartaz</Text>
             <FlatList
                 data={cartaz}
                 renderItem={<Card/>}
                 keyExtractor={item => item.id}
             />
             {/* break line */}
-            <Text>top alguma coisa...</Text>
+            <Text style={styles.text}>Top ranqueado</Text>
             <FlatList
                 data={topRated}
                 renderItem={<Card/>}
@@ -38,7 +39,7 @@ export default function GenreLists(){
             />
 
             {/* colocar um seletor de genero??? */}
-            <Text>
+            <Text style={styles.text}>
                 Genero: 
             </Text>
             <FlatList
@@ -50,3 +51,9 @@ export default function GenreLists(){
         </View>
     )
 }
+
+const styles = StyleSheet.create({
+    text:{
+        marginHorizontal:15
+    }
+})
