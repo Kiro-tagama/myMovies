@@ -10,7 +10,7 @@ import imgDivider from '../assets/dividerBlue.png'
 export default function Menu(){
 
   return(
-    <>
+    <View>
     <Image source={imgDivider} style={{width:"100%",transform: [{ rotate: '180deg' }]}}/>
     <View style={styles.menu}>
       <TouchableOpacity>
@@ -34,7 +34,7 @@ export default function Menu(){
         </View>
       </TouchableOpacity>
     </View>
-    </>
+    </View>
   )
 }
 

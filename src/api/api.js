@@ -9,15 +9,15 @@ const API = 'https://api.themoviedb.org/3/'
 const KEY_API='?api_key=d1615f652decb87e27cb2749542f5f69&'
 
 export async function api(search) {
-    const api = await fetch(API + search + KEY_API + 'language=pt-BR')
-    const data = await api.json()
+    const api = await axios.get(API + search + KEY_API + 'language=pt-BR')
+    .then(res=>{let data = res.data; return data})
 
-    return data
+    return api
 }
 
-export async function apiSearch(search) {
-    const api = await axios.get(API+'search/company'+KEY_API+`query=${search}&page=1`)
-    const data = await api.data
+export async function apiSearch(type,search) {
+    const api = await axios.get(API+'search/'+{type}+KEY_API+`query=${search}&page=1`)
+    .then(res=>{let data = res.data; return data})
 
-    return api.data
+    return api
 }

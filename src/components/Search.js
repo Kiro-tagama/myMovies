@@ -9,22 +9,24 @@ export default function Search(props) {
     const [searchName, setSearchName] = useState([])
 
     useEffect(async ()=>{
-        setSearchName(await apiSearch(props.search))
-    })
+        setSearchName(await apiSearch(props.type,props.search))
+    },[props.search])
 
     console.log(searchName);
 
     const renderItem = ({ item }) => (
-        <Text >{item}</Text>
+        <Card img={item.logo_path} name={item.name}/>
       );
 
     return(
-        <View style={{paddingHorizontal:20,paddingVertical:5}}>
-            <Text>" {props.search} "</Text>
+        <View style={{paddingHorizontal:20,paddingVertical:10}}>
             <FlatList
-                data={searchName}
+                data={searchName.results}
                 renderItem={renderItem}
-                // keyExtractor={item => item.results.id}
+                keyExtractor={item => item.id}
+                style={{
+                    flexWrap:'wrap',
+                }}
             />
         </View>
     )

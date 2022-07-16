@@ -24,7 +24,7 @@ export default function Header({search,setSearch}){
     }
 
     return(
-        <>
+        <View>
         <View style={styles.header}>
             <View style={{flexDirection:"row",marginVertical:5,alignItems:"center"}}>
                 <View style={styles.input}>
@@ -73,7 +73,7 @@ export default function Header({search,setSearch}){
             }
         </View>
         <Image source={imgDivider} style={{width:"100%"}}/>
-        </>
+        </View>
     )
 }
 

@@ -13,11 +13,11 @@ import Search from "../../components/Search";
 
 export default function HomeScreen() {
 
-  const [tipo,setTipo]=useState() // filmes,todos,series
+  const [type,setType]=useState('movie') // filmes,todos,series
   const [genero,setGenero]=useState() // arrey de opçoes
   const [assistido,setAssistido]=useState(false) //true or false
   
-  const [search, setSearch] = useState('')
+  const [search, setSearch] = useState('the boys')
 
   return (
     <View style={styles.container}>
@@ -27,7 +27,8 @@ export default function HomeScreen() {
 
         {
           search.length == 0 ?
-          <GenreLists/> : <Search search={search}/>
+          <GenreLists/> : 
+          <Search type={type} search={search}/>
         }
         
       </View>

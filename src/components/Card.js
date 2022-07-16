@@ -1,18 +1,33 @@
-import {Image,TouchableOpacity} from 'react-native'
+import {Image,StyleSheet,TouchableOpacity} from 'react-native'
+import Colors from '../../constants/Colors';
 import { Text, View } from "../../styleSettings/Themed";
 
 
-export default function Card(){
+export default function Card({img,name}){
     function openDatails() {
         console.log('return key do selecionado e abre o card dele');
     }
     return(
-        <TouchableOpacity onPress={openDatails}>
-            <Image src='' />
-            <View>
-                <Text>name</Text>
-                {/* input de checked */}
-            </View>
+        <TouchableOpacity onPress={openDatails} style={styles.card}>
+            <Image src={img} 
+                style={styles.img}
+            />
+            <Text>{name}</Text>
         </TouchableOpacity>
     )
 }
+
+const styles = StyleSheet.create({
+    card:{
+        backgroundColor:Colors.azulAtivo,
+        width: 120,
+        borderRadius:15
+    },
+    img:{
+        width:'100%',
+        height:100
+    },
+    txt:{
+
+    }
+})
