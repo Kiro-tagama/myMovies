@@ -9,7 +9,7 @@ export default function Card({img,name}){
     }
     return(
         <TouchableOpacity onPress={openDatails} style={styles.card}>
-            <Image src={img} 
+            <Image src={"https://image.tmdb.org/t/p/w500"+img} 
                 style={styles.img}
             />
             <Text>{name}</Text>
@@ -28,6 +28,6 @@ const styles = StyleSheet.create({
         height:100
     },
     txt:{
-
+        fontSize:12,
     }
 })

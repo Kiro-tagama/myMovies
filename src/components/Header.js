@@ -12,40 +12,54 @@ import Fonts from "../../constants/Fonts";
 
 import { useNavigation } from "@react-navigation/native";
 
-export default function Header({search,setSearch}){
-    const [type, setType] = useState('Filme')  // filme,serie,anime
-
-  const navigation = useNavigation()
-
-    function getMovies(params) {
-        //fecha o teclado
-        //chama os filmes ou talvez nem precise
-        console.log('chama os filmes');
+export default function Header({search,setSearch,type,setType}){
+    
+    
+    const navigation = useNavigation()
+    
+    
+    function options() {
+        let filme = ()=>{ if (type == 'movie'){return Colors.azulAtivo}else{'#999'}}
+        let serie = ()=>{ if (type == 'tv'){return Colors.azulAtivo}else{'#999'}}
+        let anime = ()=>{ if (type == ''){return Colors.azulAtivo}else{'#999'}} //???
+        
+        return(
+            <View style={{flexDirection:"row", justifyContent:'space-around',marginTop:10}}>
+                {/* <TouchableOpacity onPress={()=>{setType('???')}}>
+                    <Text style={[styles.op,{color:anime}]}>Animes</Text>
+                </TouchableOpacity> */}
+                <TouchableOpacity onPress={()=>{setType('movie')}}>
+                    <Text style={[styles.op,{color:filme}]}>Filmes</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={()=>{setType('tv')}}>
+                    <Text style={[styles.op,{color:serie}]}>Series</Text>
+                </TouchableOpacity>
+            </View>
+        )
+        
     }
+
 
     return(
         <View>
         <View style={styles.header}>
             <View style={{flexDirection:"row",marginVertical:5,alignItems:"center"}}>
                 <View style={styles.input}>
-                { search.length <= 1 ? 
-                    null :
-                    <TouchableOpacity onPress={()=>setSearch('')} style={{}}>
-                        <Feather name="x-circle" size={30} color={Colors.azulAtivo} style={{padding:5,paddingVertical:2}}/>
-                    </TouchableOpacity>
-                }
                     <TextInput
                         style={{flex:1,marginHorizontal:10,fontSize:18,color:Colors.azulAtivo}}
                         value={search}
                         placeholder="pesquisa..."
                         placeholderTextColor={'#555'}
                         onChangeText={(txt)=>setSearch(txt)}
-                    />
-                    <TouchableOpacity onPress={getMovies}>
-                        <Text style={{backgroundColor:Colors.azulAtivo,padding:8,borderRadius:8}}>
-                            <Feather name="search" size={24}/>
-                        </Text>
-                    </TouchableOpacity>
+                        />
+                    { search.length <= 1 ? 
+                        null :
+                        <TouchableOpacity onPress={()=>setSearch('')}>
+                            <Text style={{backgroundColor:Colors.azulAtivo,padding:8,borderRadius:8}}>
+                            <Feather name="x-circle" size={30} color={Colors.azulAtivo} style={{padding:5,paddingVertical:2}}/>
+                            </Text>
+                        </TouchableOpacity>
+                    }
                 </View>
 
                 { search.length >= 1 ? 
@@ -57,20 +71,7 @@ export default function Header({search,setSearch}){
                     </TouchableOpacity>
                 }
             </View>
-            { search.length >= 1 ? 
-                null :
-                <View style={{flexDirection:"row", justifyContent:'space-around',marginTop:10}}>
-                    <TouchableOpacity>
-                        <Text style={styles.op}>Animes</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={styles.op}>Filmes</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={styles.op}>Series</Text>
-                    </TouchableOpacity>
-                </View>
-            }
+            {options()}
         </View>
         <Image source={imgDivider} style={{width:"100%"}}/>
         </View>

@@ -16,7 +16,7 @@ export default function Search(props) {
 
     const renderItem = ({ item }) => (
         <Card img={item.logo_path} name={item.name}/>
-      );
+    );
 
     return(
         <View style={{paddingHorizontal:20,paddingVertical:10}}>

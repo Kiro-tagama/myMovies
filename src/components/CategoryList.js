@@ -6,7 +6,7 @@ import { Text, View } from "../../styleSettings/Themed";
 import { api } from '../api/api';
 import Card from './Card';
 
-export default function GenreLists(){
+export default function CategoryList(){
     const [cartaz, setCartaz]= useState([])
     const [topRated, setTopRated]= useState([])
     const [genre, setGenre]= useState([])
@@ -20,6 +20,9 @@ export default function GenreLists(){
     }, [])
 
     // console.log(api('genre/movie/list'));
+    const renderItem = ({ item }) => (
+        <Card img={item.logo_path} name={item.name}/>
+    );
 
     return(
         <View style={{flex:1,paddign:2,marginVertical:10}}>
@@ -27,25 +30,29 @@ export default function GenreLists(){
             <Text style={styles.text}>Em cartaz</Text>
             <FlatList
                 data={cartaz}
-                renderItem={<Card/>}
+                renderItem={renderItem}
                 keyExtractor={item => item.id}
+                horizontal={true}
             />
             {/* break line */}
             <Text style={styles.text}>Top ranqueado</Text>
             <FlatList
                 data={topRated}
-                renderItem={<Card/>}
+                renderItem={renderItem}
                 keyExtractor={item => item.id}
+                horizontal={true}
             />
 
             {/* colocar um seletor de genero??? */}
             <Text style={styles.text}>
                 Genero: 
+                <Text style={{color:'#07f'}}>- Picker -</Text>
             </Text>
             <FlatList
                 data={genre}
-                renderItem={<Card/>}
+                renderItem={renderItem}
                 keyExtractor={item => item.id}
+                horizontal={true}
             />
 
         </View>
