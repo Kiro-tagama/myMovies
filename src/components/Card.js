@@ -12,8 +12,9 @@ export default function Card({img,name}){
     }
     return(
         <TouchableOpacity onPress={openDatails} style={styles.card}>
-            <Image src={"https://image.tmdb.org/t/p/w500"+img} 
+            <Image source={`https://image.tmdb.org/t/p/w500${img}`} 
                 style={styles.img}
+                
             />
             <Text>{name}</Text>
         </TouchableOpacity>

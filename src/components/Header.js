@@ -44,7 +44,7 @@ export default function Header({search,setSearch,type,setType}){
             <View style={{flexDirection:"row",marginVertical:5,alignItems:"center"}}>
                 <View style={styles.input}>
                     <TextInput
-                        style={{flex:1,marginHorizontal:5,fontSize:18,color:Colors.azulAtivo,padding:6}}
+                        style={{flex:1,marginHorizontal:5,fontSize:18,color:Colors.azulAtivo,padding:5}}
                         value={search}
                         placeholder="pesquisa..."
                         placeholderTextColor={'#555'}
@@ -54,8 +54,8 @@ export default function Header({search,setSearch,type,setType}){
                     { search.length <= 1 ? 
                         null :
                         <TouchableOpacity onPress={()=>setSearch('')}>
-                            <Text style={{backgroundColor:Colors.azulAtivo,padding:8,borderRadius:8}}>
-                            <Feather name="x-circle" size={30} color={Colors.azulAtivo} style={{padding:5,paddingVertical:2}}/>
+                            <Text style={{backgroundColor:Colors.azulAtivo,padding:5,borderRadius:8}}>
+                            <Feather name="x-circle" size={25} style={{padding:5,paddingVertical:2}}/>
                             </Text>
                         </TouchableOpacity>
                     }
