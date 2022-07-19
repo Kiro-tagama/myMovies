@@ -15,7 +15,7 @@ export default function Search(props) {
     console.log(searchName);
 
     const renderItem = ({ item }) => (
-        <Card img={item.logo_path} name={item.name}/>
+        <Card img={item.logo_path} name={item.title}/>
       );
 
     return(
@@ -24,9 +24,6 @@ export default function Search(props) {
                 data={searchName.results}
                 renderItem={renderItem}
                 keyExtractor={item => item.id}
-                style={{
-                    flexWrap:'wrap',
-                }}
             />
         </View>
     )

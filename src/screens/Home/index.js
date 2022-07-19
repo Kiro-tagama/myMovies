@@ -21,7 +21,10 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-      <Header search={search} setSearch={setSearch}/>
+      <Header 
+        search={search} setSearch={setSearch} 
+        type={type} setType={setType} 
+        />
       {/* /// */}
       <View style={styles.container}>
 

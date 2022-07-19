@@ -21,7 +21,8 @@ const styles = StyleSheet.create({
     card:{
         backgroundColor:Colors.azulAtivo,
         width: 120,
-        borderRadius:15
+        borderRadius:15,
+        flexGrow:1
     },
     img:{
         width:'100%',

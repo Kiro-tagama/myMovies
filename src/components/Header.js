@@ -12,8 +12,7 @@ import Fonts from "../../constants/Fonts";
 
 import { useNavigation } from "@react-navigation/native";
 
-export default function Header({search,setSearch}){
-    const [type, setType] = useState('Filme')  // filme,serie,anime
+export default function Header({search,setSearch,type,setType}){
 
   const navigation = useNavigation()
 
@@ -28,24 +27,19 @@ export default function Header({search,setSearch}){
         <View style={styles.header}>
             <View style={{flexDirection:"row",marginVertical:5,alignItems:"center"}}>
                 <View style={styles.input}>
-                { search.length <= 1 ? 
-                    null :
-                    <TouchableOpacity onPress={()=>setSearch('')} style={{}}>
-                        <Feather name="x-circle" size={30} color={Colors.azulAtivo} style={{padding:5,paddingVertical:2}}/>
-                    </TouchableOpacity>
-                }
                     <TextInput
-                        style={{flex:1,marginHorizontal:10,fontSize:18,color:Colors.azulAtivo}}
+                        style={{flex:1,marginHorizontal:5,fontSize:18,color:Colors.azulAtivo,padding:6}}
                         value={search}
                         placeholder="pesquisa..."
                         placeholderTextColor={'#555'}
                         onChangeText={(txt)=>setSearch(txt)}
                     />
-                    <TouchableOpacity onPress={getMovies}>
-                        <Text style={{backgroundColor:Colors.azulAtivo,padding:8,borderRadius:8}}>
-                            <Feather name="search" size={24}/>
-                        </Text>
-                    </TouchableOpacity>
+                    { search.length <= 1 ? 
+                        null :
+                        <TouchableOpacity onPress={()=>setSearch('')} style={{}}>
+                            <Feather name="x-circle" size={30} color={Colors.azulAtivo} style={{padding:5}}/>
+                        </TouchableOpacity>
+                    }
                 </View>
 
                 { search.length >= 1 ? 
@@ -57,20 +51,16 @@ export default function Header({search,setSearch}){
                     </TouchableOpacity>
                 }
             </View>
-            { search.length >= 1 ? 
-                null :
-                <View style={{flexDirection:"row", justifyContent:'space-around',marginTop:10}}>
-                    <TouchableOpacity>
-                        <Text style={styles.op}>Animes</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={styles.op}>Filmes</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity>
-                        <Text style={styles.op}>Series</Text>
-                    </TouchableOpacity>
-                </View>
-            }
+            
+            <View style={{flexDirection:"row", justifyContent:'space-around',marginTop:10}}>
+                <TouchableOpacity onPress={()=>setType('muvie')}>
+                    <Text style={styles.op}>Filmes</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={()=>setType('tv')}>
+                    <Text style={styles.op}>Series</Text>
+                </TouchableOpacity>
+            </View>
+            
         </View>
         <Image source={imgDivider} style={{width:"100%"}}/>
         </View>
