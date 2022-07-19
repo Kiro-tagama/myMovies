@@ -8,7 +8,7 @@ import Fonts from "../../../constants/Fonts";
 
 import Menu from "../../components/Menu";
 import Header from "../../components/Header";
-import GenreLists from "../../components/GenreLists";
+import CategoryList from "../../components/CategoryList";
 import Search from "../../components/Search";
 
 export default function HomeScreen() {
@@ -17,20 +17,20 @@ export default function HomeScreen() {
   const [genero,setGenero]=useState() // arrey de opçoes
   const [assistido,setAssistido]=useState(false) //true or false
   
-  const [search, setSearch] = useState('the boys')
+  const [search, setSearch] = useState('batman')
 
   return (
     <View style={styles.container}>
       <Header 
         search={search} setSearch={setSearch} 
         type={type} setType={setType} 
-        />
+      />
       {/* /// */}
       <View style={styles.container}>
 
         {
           search.length == 0 ?
-          <GenreLists/> : 
+          <CategoryList/> : 
           <Search type={type} search={search}/>
         }
         

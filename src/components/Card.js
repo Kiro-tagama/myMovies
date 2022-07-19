@@ -2,6 +2,9 @@ import {Image,StyleSheet,TouchableOpacity} from 'react-native'
 import Colors from '../../constants/Colors';
 import { Text, View } from "../../styleSettings/Themed";
 
+// https://image.tmdb.org/t/p/original  -- to svg
+// https://image.tmdb.org/t/p/original  -- to png
+// https://image.tmdb.org/t/p/w500      -- to min png
 
 export default function Card({img,name}){
     function openDatails() {
@@ -9,7 +12,7 @@ export default function Card({img,name}){
     }
     return(
         <TouchableOpacity onPress={openDatails} style={styles.card}>
-            <Image src={img} 
+            <Image src={"https://image.tmdb.org/t/p/w500"+img} 
                 style={styles.img}
             />
             <Text>{name}</Text>
@@ -29,6 +32,6 @@ const styles = StyleSheet.create({
         height:100
     },
     txt:{
-
+        fontSize:12,
     }
 })

@@ -16,11 +16,27 @@ export default function Header({search,setSearch,type,setType}){
 
   const navigation = useNavigation()
 
-    function getMovies(params) {
-        //fecha o teclado
-        //chama os filmes ou talvez nem precise
-        console.log('chama os filmes');
+    function options() {
+        let filme = ()=>{ if (type == 'movie'){return Colors.azulAtivo}else{'#999'}}
+        let serie = ()=>{ if (type == 'tv'){return Colors.azulAtivo}else{'#999'}}
+        let anime = ()=>{ if (type == ''){return Colors.azulAtivo}else{'#999'}} //???
+        
+        return(
+            <View style={{flexDirection:"row", justifyContent:'space-around',marginTop:10}}>
+                {/* <TouchableOpacity onPress={()=>{setType('???')}}>
+                    <Text style={[styles.op,{color:anime}]}>Animes</Text>
+                </TouchableOpacity> */}
+                <TouchableOpacity onPress={()=>{setType('movie')}}>
+                    <Text style={[styles.op,{color:filme}]}>Filmes</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={()=>{setType('tv')}}>
+                    <Text style={[styles.op,{color:serie}]}>Series</Text>
+                </TouchableOpacity>
+            </View>
+        )
+        
     }
+
 
     return(
         <View>
@@ -34,10 +50,13 @@ export default function Header({search,setSearch,type,setType}){
                         placeholderTextColor={'#555'}
                         onChangeText={(txt)=>setSearch(txt)}
                     />
+                    
                     { search.length <= 1 ? 
                         null :
-                        <TouchableOpacity onPress={()=>setSearch('')} style={{}}>
-                            <Feather name="x-circle" size={30} color={Colors.azulAtivo} style={{padding:5}}/>
+                        <TouchableOpacity onPress={()=>setSearch('')}>
+                            <Text style={{backgroundColor:Colors.azulAtivo,padding:8,borderRadius:8}}>
+                            <Feather name="x-circle" size={30} color={Colors.azulAtivo} style={{padding:5,paddingVertical:2}}/>
+                            </Text>
                         </TouchableOpacity>
                     }
                 </View>
@@ -51,16 +70,8 @@ export default function Header({search,setSearch,type,setType}){
                     </TouchableOpacity>
                 }
             </View>
-            
-            <View style={{flexDirection:"row", justifyContent:'space-around',marginTop:10}}>
-                <TouchableOpacity onPress={()=>setType('muvie')}>
-                    <Text style={styles.op}>Filmes</Text>
-                </TouchableOpacity>
-                <TouchableOpacity onPress={()=>setType('tv')}>
-                    <Text style={styles.op}>Series</Text>
-                </TouchableOpacity>
-            </View>
-            
+
+            {options()}
         </View>
         <Image source={imgDivider} style={{width:"100%"}}/>
         </View>
