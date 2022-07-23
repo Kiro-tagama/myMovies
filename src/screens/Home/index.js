@@ -14,7 +14,7 @@ import Search from "../../components/Search";
 export default function HomeScreen() {
 
   const [type,setType]=useState('movie') // filmes,todos,series
-  const [genero,setGenero]=useState() // arrey de opçoes
+  const [genre,setGenre]=useState() // arrey de opçoes
   const [assistido,setAssistido]=useState(false) //true or false
   
   const [search, setSearch] = useState('')
@@ -30,14 +30,17 @@ export default function HomeScreen() {
 
         {
           search.length == 0 ?
-          <CategoryList/> : 
+          <CategoryList type={type}/> : 
           <Search type={type} search={search}/>
         }
         
       </View>
       {/* /// */}
-      <Menu/>
-      <StatusBar style="light"/>
+      {
+        search.length == 0 ?
+        <Menu/>:null
+      }
+      <StatusBar style='auto'/>
     </View>
   );
 }

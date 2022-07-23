@@ -10,6 +10,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import LoginScreen from "../src/screens/Login";
 import HomeScreen from "../src/screens/Home";
 import ProfileScreen from "../src/screens/Profile";
+import SelectedScreen from "../src/screens/Selected";
 
 import LinkingConfiguration from "./LinkingConfiguration";
 import { useContext, useState } from "react";
@@ -40,6 +41,7 @@ function RootNavigator() {
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         <Stack.Screen name="Home" component={HomeScreen} /> 
         <Stack.Screen name="Profile" component={ProfileScreen} />
+        <Stack.Screen name="Selected" component={SelectedScreen} />
       </Stack.Navigator>
     )
   }

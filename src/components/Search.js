@@ -13,11 +13,8 @@ export default function Search({type,search}) {
         setSearchName(await apiSearch(type,search))
     },[type,search])
 
-    console.log(searchName);
-
     const renderItem = ({ item }) => (
-        <Card img={item.poster_path} name={item.title}/>
-
+        <Card img={item.poster_path} id={item.id}/>
     );
 
     return(
@@ -27,7 +24,7 @@ export default function Search({type,search}) {
                 renderItem={renderItem}
                 keyExtractor={item => item.id}
                 showsVerticalScrollIndicator={false}
-                containerWidth={380}
+                containerWidth={380}  // mudar esse tamanho fixo
                 itemSpacing={10}
             />
         </View>

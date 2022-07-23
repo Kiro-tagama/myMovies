@@ -14,23 +14,23 @@ import { useNavigation } from "@react-navigation/native";
 
 export default function Header({search,setSearch,type,setType}){
 
-  const navigation = useNavigation()
+    const navigation = useNavigation()
 
     function options() {
-        let filme = ()=>{ if (type == 'movie'){return Colors.azulAtivo}else{'#999'}}
-        let serie = ()=>{ if (type == 'tv'){return Colors.azulAtivo}else{'#999'}}
-        let anime = ()=>{ if (type == ''){return Colors.azulAtivo}else{'#999'}} //???
-        
         return(
             <View style={{flexDirection:"row", justifyContent:'space-around',marginTop:10}}>
                 {/* <TouchableOpacity onPress={()=>{setType('???')}}>
                     <Text style={[styles.op,{color:anime}]}>Animes</Text>
                 </TouchableOpacity> */}
                 <TouchableOpacity onPress={()=>{setType('movie')}}>
-                    <Text style={[styles.op]}>Filmes</Text>
+                    { type == 'movie' ?
+                    <Text style={[styles.op,{color:Colors.azulAtivo}]}>Filmes</Text>:
+                    <Text style={[styles.op]}>Filmes</Text>}
                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=>{setType('tv')}}>
-                    <Text style={[styles.op]}>Series</Text>
+                    { type == 'tv' ?
+                    <Text style={[styles.op,{color:Colors.azulAtivo}]}>Series</Text>:
+                    <Text style={[styles.op]}>Series</Text>}
                 </TouchableOpacity>
             </View>
         )
@@ -51,7 +51,7 @@ export default function Header({search,setSearch,type,setType}){
                         onChangeText={(txt)=>setSearch(txt)}
                     />
                     
-                    { search.length <= 1 ? 
+                    { search.length == 0 ? 
                         null :
                         <TouchableOpacity onPress={()=>setSearch('')}>
                             <Text style={{backgroundColor:Colors.azulAtivo,padding:5,borderRadius:8}}>
@@ -61,13 +61,13 @@ export default function Header({search,setSearch,type,setType}){
                     }
                 </View>
 
-                { search.length >= 1 ? 
-                    null :
+                { search.length == 0 ? 
                     <TouchableOpacity onPress={()=>navigation.navigate("Profile")}
-                        style={{marginLeft:10}}
+                    style={{marginLeft:10}}
                     >
                         <FontAwesome5 name="user-circle" size={42} color={Colors.azulAtivo} style={{marginLeft:5}}/>
                     </TouchableOpacity>
+                    :null 
                 }
             </View>
 
@@ -100,7 +100,8 @@ const styles = StyleSheet.create({
     },
     op:{
         textAlign:"center",
-        width:100
+        width:100,
+        fontSize:Fonts.h3.fontSize,
+        fontWeight:'bold'
     }
-    
 })
