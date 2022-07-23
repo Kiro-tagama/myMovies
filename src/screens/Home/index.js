@@ -17,7 +17,7 @@ export default function HomeScreen() {
   const [genero,setGenero]=useState() // arrey de opçoes
   const [assistido,setAssistido]=useState(false) //true or false
   
-  const [search, setSearch] = useState('batman')
+  const [search, setSearch] = useState('')
 
   return (
     <View style={styles.container}>

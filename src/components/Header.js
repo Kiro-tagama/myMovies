@@ -27,10 +27,10 @@ export default function Header({search,setSearch,type,setType}){
                     <Text style={[styles.op,{color:anime}]}>Animes</Text>
                 </TouchableOpacity> */}
                 <TouchableOpacity onPress={()=>{setType('movie')}}>
-                    <Text style={[styles.op,{color:filme}]}>Filmes</Text>
+                    <Text style={[styles.op]}>Filmes</Text>
                 </TouchableOpacity>
                 <TouchableOpacity onPress={()=>{setType('tv')}}>
-                    <Text style={[styles.op,{color:serie}]}>Series</Text>
+                    <Text style={[styles.op]}>Series</Text>
                 </TouchableOpacity>
             </View>
         )

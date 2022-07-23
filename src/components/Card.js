@@ -12,25 +12,25 @@ export default function Card({img,name}){
     }
     return(
         <TouchableOpacity onPress={openDatails} style={styles.card}>
-            <Image source={`https://image.tmdb.org/t/p/w500${img}`} 
+            <Image source={{uri:'https://image.tmdb.org/t/p/w500'+img}} 
                 style={styles.img}
                 
             />
-            <Text>{name}</Text>
+            {/* <Text>{name}</Text> */}
         </TouchableOpacity>
     )
 }
 
 const styles = StyleSheet.create({
     card:{
-        backgroundColor:Colors.azulAtivo,
         width: 120,
-        borderRadius:15,
-        flexGrow:1
     },
     img:{
         width:'100%',
-        height:100
+        height:180,
+        borderRadius:10,
+        borderWidth:.2,
+        borderColor:Colors.azulAtivo
     },
     txt:{
         fontSize:12,
