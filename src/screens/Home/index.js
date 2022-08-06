@@ -38,7 +38,7 @@ export default function HomeScreen() {
       {/* /// */}
       {
         search.length == 0 ?
-        <Menu/>:null
+        <Menu value='home'/>:null
       }
       <StatusBar style='auto'/>
     </View>

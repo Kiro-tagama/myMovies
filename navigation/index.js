@@ -13,7 +13,7 @@ import ProfileScreen from "../src/screens/Profile";
 import SelectedScreen from "../src/screens/Selected";
 
 import LinkingConfiguration from "./LinkingConfiguration";
-import { useContext, useState } from "react";
+import { useContext} from "react";
 import AuthProvider, { FirebaseContext } from "../src/firebase/firebaseContext";
 
 export default function Navigation({ colorScheme }) {

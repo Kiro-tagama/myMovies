@@ -11,14 +11,13 @@ export default function Card({img,id}){
 
     function openDatails() {
         console.log('return :'+ id);
-        navigation.navigate("Selected")    
+        navigation.navigate("Selected",id)    
     }
 
     return(
         <TouchableOpacity onPress={openDatails} style={styles.card}>
             <Image source={{uri:'https://image.tmdb.org/t/p/w500'+img}} 
                 style={styles.img}
-                
             />
         </TouchableOpacity>
     )
@@ -32,7 +31,7 @@ const styles = StyleSheet.create({
         width:'100%',
         height:180,
         borderRadius:10,
-        borderWidth:.2,
+        borderWidth:.1,
         borderColor:Colors.azulAtivo
     },
     txt:{
