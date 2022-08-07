@@ -1,6 +1,6 @@
 import { StyleSheet, TouchableOpacity, Image } from "react-native"
 import { View, Text } from "../../styleSettings/Themed";
-import { FontAwesome5,Ionicons } from '@expo/vector-icons';
+import { FontAwesome5,Ionicons,MaterialCommunityIcons  } from '@expo/vector-icons';
 
 
 import imgDivider from '../assets/dividerBlue.png'
@@ -32,8 +32,8 @@ export default function Menu(props){
   <>
     <TouchableOpacity>
       <View style={[styles.opcoes,{borderTopLeftRadius:10,borderBottomLeftRadius:10}]}>
-        <Text></Text>
-        <Text>Todos</Text>
+        <Text><MaterialCommunityIcons name="movie-open-outline" size={30}/></Text>
+        <Text style={styles.txtMenu}>Todos</Text>
       </View>
     </TouchableOpacity>
     <TouchableOpacity onPress={randomPlay}>
@@ -41,13 +41,13 @@ export default function Menu(props){
         <Text>
           <FontAwesome5 name="random" size={30}/>
         </Text>
-        <Text>Aleatorio</Text>
+        <Text style={styles.txtMenu}>Aleatorio</Text>
       </View>
     </TouchableOpacity>
     <TouchableOpacity>
-      <View style={[styles.opcoes,{borderTopRightRadius:10,borderBottomRightRadius:10}]}>
-        <Text></Text>
-        <Text>Já assisti</Text>
+      <View style={[styles.opcoes]}>
+        <Text><FontAwesome5 name="heart" size={30}/></Text>
+        <Text style={styles.txtMenu}>Favoritos</Text>
       </View>
     </TouchableOpacity>
   </>
@@ -100,5 +100,9 @@ const styles = StyleSheet.create({
     borderRadius:15,
     padding:12,
     paddingHorizontal:30,
+  },
+  txtMenu:{
+    fontSize:12,
+    marginTop:5
   }
 });
