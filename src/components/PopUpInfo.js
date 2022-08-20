@@ -1,4 +1,4 @@
-import {View} from 'react-natie'
+import {View} from 'react-native'
 
 // pop up content
 
