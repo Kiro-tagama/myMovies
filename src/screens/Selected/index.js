@@ -5,10 +5,12 @@ import Fonts from '../../../constants/Fonts';
 import { View,Text } from '../../../styleSettings/Themed';
 import { api } from '../../api/api';
 import Menu from '../../components/Menu';
-import {Ionicons} from '@expo/vector-icons';
+import { Ionicons, SimpleLineIcons} from '@expo/vector-icons';
 import { BlurView } from 'expo-blur';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Selected(props) {
+  const navigation=useNavigation()
   const [info, setInfo] = useState([])
   const [filter, setFilter] = useState(false)
 
@@ -55,6 +57,10 @@ export default function Selected(props) {
             </TouchableOpacity>
           </>
         }
+        <TouchableOpacity onPress={()=>navigation.goBack()}
+        style={{position:'absolute',left:20,top:40}}>
+          <SimpleLineIcons name="arrow-left" size={30} color={Colors.azulAtivo} />
+        </TouchableOpacity>
       </View>
 
       {informations}
