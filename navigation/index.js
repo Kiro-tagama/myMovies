@@ -48,7 +48,7 @@ function RootNavigator() {
 
   return (
     <>
-      { user == null ?
+      { user != null ?
           <PagesApp/> :
           <Stack.Navigator screenOptions={{ headerShown: false }}>
             <Stack.Screen name="Login" component={LoginScreen} />

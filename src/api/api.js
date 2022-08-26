@@ -17,7 +17,7 @@ export async function api(search) {
 
 export async function apiSearch(type,search) {
     const api = await axios.get(
-        `https://api.themoviedb.org/3/search/${ type + KEY_API }language=pt-BR&query=${search}`
+        `https://api.themoviedb.org/3/search/${ type }?api_key=d1615f652decb87e27cb2749542f5f69&rlanguage=pt-BR&query=${search}`
     )
     .then(res=>{let data = res.data; return data})
 

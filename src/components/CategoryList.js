@@ -19,7 +19,6 @@ export default function CategoryList({type}){
         setGenre(await api(`${typeGenre}/movie/list`))
     }, [type])
 
-    console.log(cartaz.results);
 
     const renderItem = ({ item }) => (
         <View style={{margin:10}}>
