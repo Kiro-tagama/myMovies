@@ -1,5 +1,3 @@
-// https://api.themoviedb.org/3/movie/550?api_key=d1615f652decb87e27cb2749542f5f69
-
 import axios from "axios"
 
 // type: movie | serie

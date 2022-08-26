@@ -43,7 +43,7 @@ export default function Selected(props) {
           <>
             {filter?null:
               <BlurView style={styles.filter}
-                intensity={100} tint='dark'
+                intensity={125} tint='dark'
               ></BlurView>
             }
             <TouchableOpacity onPress={()=>setFilter(!filter)}
@@ -58,8 +58,8 @@ export default function Selected(props) {
           </>
         }
         <TouchableOpacity onPress={()=>navigation.goBack()}
-        style={{position:'absolute',left:20,top:40}}>
-          <SimpleLineIcons name="arrow-left" size={30} color={Colors.azulAtivo} />
+        style={{position:'absolute',left:20,top:45,backgroundColor:'#222',padding:10,borderRadius:100}}>
+          <SimpleLineIcons name="arrow-left" size={25} color={Colors.azulAtivo} style={{width:25,height:25}}/>
         </TouchableOpacity>
       </View>
 
