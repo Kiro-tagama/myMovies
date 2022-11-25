@@ -19,5 +19,7 @@ export async function apiSearch(type,search) {
     )
     .then(res=>{let data = res.data; return data})
 
+    console.log(api)
+
     return api
 }
