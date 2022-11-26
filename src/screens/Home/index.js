@@ -30,7 +30,7 @@ export default function HomeScreen() {
 
         {
           search.length == 0 ?
-          <CategoryList type={type}/> : 
+          <CategoryList type={type}/> :
           <Search type={type} search={search}/>
         }
         

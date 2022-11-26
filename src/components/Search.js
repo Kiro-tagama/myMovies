@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
-import {FlatList} from 'react-native'
 import { GridList } from 'react-native-ui-lib';
-import { Text, View } from "../../styleSettings/Themed";
+import { View } from "../../styleSettings/Themed";
 import { apiSearch } from '../api/api';
 import Card from './Card';
 
@@ -10,7 +9,7 @@ export default function Search({type,search}) {
     const [searchName, setSearchName] = useState([])
 
     useEffect(async ()=>{
-        setSearchName(await apiSearch(type,search))
+        return setSearchName(await apiSearch(type,search))
     },[type,search])
 
     const renderItem = ({ item }) => (
