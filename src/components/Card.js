@@ -25,7 +25,7 @@ export default function Card({img,id}){
 
 const styles = StyleSheet.create({
     card:{
-        width: 120,
+        width: 115,
     },
     img:{
         width:'100%',

@@ -54,9 +54,7 @@ export default function Header({search,setSearch,type,setType}){
                     { search.length == 0 ? 
                         null :
                         <TouchableOpacity onPress={()=>setSearch('')}>
-                            <Text style={{backgroundColor:Colors.azulAtivo,padding:5,borderRadius:8}}>
-                            <Feather name="x-circle" size={25} style={{padding:5,paddingVertical:2}}/>
-                            </Text>
+                            <Feather name="x-circle" size={25} style={{padding:5,paddingVertical:2,color:Colors.azulAtivo}}/>
                         </TouchableOpacity>
                     }
                 </View>

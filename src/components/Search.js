@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useWindowDimensions } from 'react-native';
 import { GridList } from 'react-native-ui-lib';
 import { View } from "../../styleSettings/Themed";
 import { apiSearch } from '../api/api';
@@ -8,8 +9,12 @@ import Card from './Card';
 export default function Search({type,search}) {
     const [searchName, setSearchName] = useState([])
 
-    useEffect(async ()=>{
-        return setSearchName(await apiSearch(type,search))
+    const window= useWindowDimensions()
+
+    const myFunc = async ()=>setSearchName(await apiSearch(type,search))
+
+    useEffect(()=>{
+        myFunc()
     },[type,search])
 
     const renderItem = ({ item }) => (
@@ -23,7 +28,7 @@ export default function Search({type,search}) {
                 renderItem={renderItem}
                 keyExtractor={item => item.id}
                 showsVerticalScrollIndicator={false}
-                containerWidth={380}  // mudar esse tamanho fixo
+                containerWidth={window.width-30}  // mudar esse tamanho fixo
                 itemSpacing={10}
             />
         </View>

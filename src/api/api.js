@@ -17,6 +17,7 @@ export async function api(search) {
 export async function apiSearch(type,search) {
     const api = axios.get(`${API}search/${type + KEY_API}language=pt-BR&query=${search}`)
     .then(res=>res.data)
+    .catch(err=>console.log('search err '+err))
 
     return api
 }
