@@ -6,12 +6,11 @@ import Colors from '../../constants/Colors';
 // https://image.tmdb.org/t/p/original  -- to png
 // https://image.tmdb.org/t/p/w500      -- to min png
 
-export default function Card({img,id}){
+export default function Card({img,id,type}){
     const navigation = useNavigation()
 
     function openDatails() {
-        console.log('return :'+ id);
-        navigation.navigate("Selected",id)    
+        navigation.navigate("Selected",{id:id,type:type})    
     }
 
     return(

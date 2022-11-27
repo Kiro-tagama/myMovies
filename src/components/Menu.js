@@ -25,6 +25,7 @@ export default function Menu(props){
     // min 2 max
     //return Math.floor(Math.random() * (max - min) + min)
     const random=Math.floor(Math.random()*(max.id-0)+0); 
+    console.log(random);
     return navigation.navigate("Selected",random)
   }
 

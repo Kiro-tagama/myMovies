@@ -13,16 +13,19 @@ export default function CategoryList({type}){
 
     const [typeGenre, setTypeGenre]= useState('')
 
-    useEffect(async()=>{
+    const func = async()=>{
         setCartaz(await api('movie/now_playing'))
         setTopRated(await api(type+'/top_rated'))
-        setGenre(await api(`${typeGenre}/movie/list`))
+        setGenre(await api(`${typeGenre}/${type}/list`))
+    }
+    useEffect(()=>{
+        func()
     }, [type])
 
 
     const renderItem = ({ item }) => (
         <View style={{margin:10}}>
-        <Card img={item.poster_path} id={item.id} />
+        <Card img={item.poster_path} id={item.id} type={type}/>
         </View>
     );
 
@@ -33,6 +36,8 @@ export default function CategoryList({type}){
         <ScrollView>
 
             {/* se type for filmes */}
+            {type != 'movie'? null:
+            <>
             <Text style={styles.text}>Em cartaz</Text>
             <FlatList
                 data={cartaz.results}
@@ -42,6 +47,8 @@ export default function CategoryList({type}){
                 showsHorizontalScrollIndicator={false}
                 style={{height:szList}}
             />
+            </>
+            }
             {/* break line */}
             <Text style={styles.text}>Top ranqueado</Text>
             <FlatList

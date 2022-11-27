@@ -14,19 +14,21 @@ export default function Selected(props) {
   const [info, setInfo] = useState([])
   const [filter, setFilter] = useState(false)
 
-  useEffect(async()=>{
-    setInfo(await api('movie'+'/'+props.route.params))
+  const func =async ()=>setInfo(await api(props.route.params.type+'/'+props.route.params.id))
+  useEffect(()=>{
+    func()
   },[props.route.params])
 
+  console.log(info);
   const informations = (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={[Fonts.h2,{flex:1}]}>{info.title}</Text>
+        <Text style={[Fonts.h2,{flex:1}]}>{info.title || info.name || info.original_name}</Text>
         <Text style={[Fonts.h3,{marginHorizontal:10,color:'#f00'}]}>{info.adult == false ? null : "+18"}</Text>
       </View>
       <Text/>
-      <Text>{info.release_date}</Text>
-      <Text>{info.runtime} min</Text>
+      <Text>{info.number_of_seasons+" seasons"|| info.release_date}</Text>
+      <Text>{info.number_of_episodes+" episodes" || info.runtime+" min"}</Text>
       <View style={{flexDirection:'row',flexWrap:'wrap'}}>
         {!info.genres ? null : info.genres.map(x=><Text style={styles.genres}>{x.name}</Text>)}
       </View>
@@ -38,6 +40,7 @@ export default function Selected(props) {
     </View>
   )
 
+  const key= info.id
   return (
     <View style={{flex:1}}>
       {info.length==0?
@@ -46,7 +49,7 @@ export default function Selected(props) {
       </View>
       :
       <View style={{flex:1}}>
-        <View>
+        <View key={key.toString()}>
           <Image source={{uri:'https://image.tmdb.org/t/p/original'+info.backdrop_path}} style={styles.img}/>
           {info.adult == false? null :
             <>
