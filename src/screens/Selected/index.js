@@ -14,12 +14,13 @@ export default function Selected(props) {
   const [info, setInfo] = useState([])
   const [filter, setFilter] = useState(false)
 
-  const func =async ()=>setInfo(await api(props.route.params.type+'/'+props.route.params.id))
+  const func =async ()=>{
+    setInfo(await api(props.route.params.type+'/'+props.route.params.id))
+  }
   useEffect(()=>{
     func()
-  },[props.route.params])
+  },[props.route.params.id])
 
-  console.log(info);
   const informations = (
     <View style={styles.container}>
       <View style={styles.header}>
@@ -27,9 +28,11 @@ export default function Selected(props) {
         <Text style={[Fonts.h3,{marginHorizontal:10,color:'#f00'}]}>{info.adult == false ? null : "+18"}</Text>
       </View>
       <Text/>
-      <Text>{info.number_of_seasons+" seasons"|| info.release_date}</Text>
-      <Text>{info.number_of_episodes+" episodes" || info.runtime+" min"}</Text>
-      <View style={{flexDirection:'row',flexWrap:'wrap'}}>
+
+      <Text>{info.release_date || info.number_of_seasons+" seasons"}</Text>
+      <Text>{props.route.params.type == "movie"?  info.runtime+" min" : info.number_of_episodes+" episodes"}</Text>
+      
+      <View style={{flexDirection:'row',flexWrap:'wrap',marginTop:5}}>
         {!info.genres ? null : info.genres.map(x=><Text style={styles.genres}>{x.name}</Text>)}
       </View>
       <Text/>
@@ -45,7 +48,7 @@ export default function Selected(props) {
     <View style={{flex:1}}>
       {info.length==0?
       <View style={{flex:1,justifyContent: "center", alignItems:'center' }}>
-      <ActivityIndicator size="large" color={Colors.azulAtivo}/>
+        <ActivityIndicator size="large" color={Colors.azulAtivo}/>
       </View>
       :
       <View style={{flex:1}}>
@@ -77,7 +80,7 @@ export default function Selected(props) {
 
         {informations}
 
-        <Menu value='selected' play={info.homepage}/>
+        <Menu value='selected' play={info.title}/>
       </View>
       }
     </View>
@@ -117,7 +120,6 @@ const styles = StyleSheet.create({
     position:'absolute',
     left:20,
     top:45,
-    backgroundColor:'#222',
     padding:10,
     paddingLeft:8,
     paddingRight:12,

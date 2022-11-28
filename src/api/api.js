@@ -9,7 +9,15 @@ const KEY_API='?api_key=d1615f652decb87e27cb2749542f5f69&'
 export async function api(search) {
     const api = axios.get(API + search + KEY_API + 'language=pt-BR')
     .then(res=>res.data)
-    .catch(err=>console.log(err))
+    .catch(err=>{
+        console.log(err)
+        return {
+            id:"0",
+            title:"err",
+            adult:false,
+            overview:"voltar ou escolha randomica"
+        }
+    })
 
     return api
 }

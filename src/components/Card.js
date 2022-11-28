@@ -14,7 +14,7 @@ export default function Card({img,id,type}){
     }
 
     return(
-        <TouchableOpacity onPress={openDatails} style={styles.card}>
+        <TouchableOpacity onPress={openDatails} style={styles.card} >
             <Image source={{uri:'https://image.tmdb.org/t/p/w500'+img}} 
                 style={styles.img}
             />

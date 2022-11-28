@@ -1,4 +1,4 @@
-import { StyleSheet, TouchableOpacity, Image } from "react-native"
+import { StyleSheet, TouchableOpacity, Image, Linking } from "react-native"
 import { View, Text } from "../../styleSettings/Themed";
 import { FontAwesome5,Ionicons,MaterialCommunityIcons  } from '@expo/vector-icons';
 
@@ -7,7 +7,6 @@ import imgDivider from '../assets/dividerBlue.png'
 import { api } from "../api/api";
 import { useEffect, useState } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { clickProps } from "react-native-web/dist/cjs/modules/forwardedProps";
 import Colors from "../../constants/Colors";
 
 
@@ -17,16 +16,19 @@ export default function Menu(props){
   const [max, setMax]= useState(0)
   const navigation = useNavigation()
 
-  useEffect(async()=>{
-    setMax(await api('movie/latest'))
+  // verificar o ultimo filme postado para ter um limite do numero randomico
+  const func = async()=>setMax(await api('movie/latest'))
+  useEffect(()=>{
+    func()
   },[])
 
   async function randomPlay(){
     // min 2 max
     //return Math.floor(Math.random() * (max - min) + min)
     const random=Math.floor(Math.random()*(max.id-0)+0); 
-    console.log(random);
-    return navigation.navigate("Selected",random)
+    
+    console.log(random,' ',props.type);
+    return navigation.navigate("Selected",{id:random,type:props.type||'movie'})
   }
 
   const menuHome=(
@@ -62,7 +64,8 @@ export default function Menu(props){
     <TouchableOpacity style={styles.btn} onPress={randomPlay}>
       <Text><FontAwesome5 name="random" size={30}/></Text>
     </TouchableOpacity>
-    <TouchableOpacity style={styles.btn} onPress={()=>{Linking.openURL(props.play)}}>
+    <TouchableOpacity style={styles.btn} onPress={()=>{
+      Linking.openURL("https://www.google.com/search?q="+props.play)}}>
       <Text><Ionicons name="play-outline" size={30}/></Text>
     </TouchableOpacity>
   </>
