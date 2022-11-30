@@ -80,7 +80,7 @@ export default function Selected(props) {
 
         {informations}
 
-        <Menu value='selected' play={info.title}/>
+        <Menu value='selected' play={info.title || info.name || info.original_name}/>
       </View>
       }
     </View>

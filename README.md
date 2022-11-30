@@ -4,4 +4,4 @@
 
   - expo icons
   - firebase
-  - axios API- TMDB
+  - axios API - TMDB

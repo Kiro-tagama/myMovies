@@ -13,13 +13,15 @@
       "backgroundColor": "#222"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/861b2cdc-5a32-4c5f-9533-d114a7beb72a"
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.kirotagama.expotemplatetabs"
     },
     "android": {
       "adaptiveIcon": {
@@ -35,6 +37,9 @@
       "eas": {
         "projectId": "861b2cdc-5a32-4c5f-9533-d114a7beb72a"
       }
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
     }
   }
 }

@@ -1,13 +1,13 @@
 import axios from "axios"
-
+import {APP_API_KEY} from '@env'
 // type: movie | serie
 // code: 550
 
 const API = 'https://api.themoviedb.org/3/'
-const KEY_API='?api_key=d1615f652decb87e27cb2749542f5f69&'
+const KEY_API=APP_API_KEY
 
 export async function api(search) {
-    const api = axios.get(API + search + KEY_API + 'language=pt-BR')
+    const api = axios.get(`${API + search + KEY_API }language=pt-BR`)
     .then(res=>res.data)
     .catch(err=>{
         console.log(err)
@@ -18,7 +18,6 @@ export async function api(search) {
             overview:"voltar ou escolha randomica"
         }
     })
-
     return api
 }
 
