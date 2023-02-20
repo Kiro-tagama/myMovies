@@ -4,7 +4,7 @@ import {APP_API_KEY} from '@env'
 // code: 550
 
 const API = 'https://api.themoviedb.org/3/'
-const KEY_API=APP_API_KEY
+const KEY_API=`?api_key=${APP_API_KEY}&`
 
 export async function api(search) {
     const api = axios.get(`${API + search + KEY_API }language=pt-BR`)
